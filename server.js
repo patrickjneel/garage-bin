@@ -6,8 +6,8 @@ const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
 
 app.set('port', process.env.PORT || 3000);
-
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 
 app.locals.title = 'Garage-Store';
@@ -36,8 +36,8 @@ app.post('/api/v1/all_items', (request, response) => {
     }
   }
   database('items').insert(item, 'id')
-    .then(item => {
-      return response.status(201).json({ id: item[0]})
+    .then(items => {
+      return response.status(201).json({ id: items[0]})
     })
     .catch(error => {
       return response.status(500).json({ error })
