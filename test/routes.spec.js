@@ -93,7 +93,7 @@ describe('API Routes', () => {
     })
   })
 
-  it.only('should update an item with a successful patch', () => {
+  it.skip('should update an item with a successful patch', () => {
     return chai.request(server)
     .patch('/api/v1/all_items')
     .send({
