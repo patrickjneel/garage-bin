@@ -1,14 +1,15 @@
+$(document).ready(() => {
+  itemCount()
+});
+
 
 const showItems = async () => {
   const itemData = await fetch('/api/v1/all_items')
   const itemJson = await itemData.json()
   const items = itemJson.items
-  const length = items.length
-  console.log(length)
   $('.item-list').empty()
   $('.item-list').toggleClass('clicked')
 
-  $('.counter').append(`<h4>Total Count: ${length}</h4>`)
   
   if ($('.item-list').hasClass('clicked')) {
   const shownItems = items.map(item => {
@@ -123,10 +124,19 @@ const displayItemInfo = (event) => {
   $(event.target).next().toggleClass('item-info')
 }
 
+const itemCount = async () => {
+  const itemData = await fetch('/api/v1/all_items')
+  const itemJson = await itemData.json()
+  const items = itemJson.items
+  const itemLength = items.length
+  $('.item-count').append(`${itemLength}`)
+}
+
 $('.show-btn').on('click', showItems)
 $('.add-item-btn').on('click', postItem)
 $('.sort-btn').on('click', sortItems)
 $('.sort-ZA-btn').on('click', sortZa)
 $(document).on('click', '.item-name', displayItemInfo)
+
 
 
