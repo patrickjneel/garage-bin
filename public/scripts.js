@@ -42,6 +42,7 @@ const postItem = async () => {
 }
 
 const sortItems = async () => {
+    $('.item-list').empty()
   const itemData = await fetch('/api/v1/all_items')
   const itemJson = await itemData.json()
   const itemArray = await itemJson.items
@@ -58,8 +59,18 @@ const sortItems = async () => {
   
   return 0;
   })
-  console.log(sortArray)
+  sortArray.map(sortItems => {
+    $('.item-list').append(
+    `<div class="item-cards">
+      <h4>ITEM NAME: ${sortItems.itemName}</h4>
+      <span>REASON: ${sortItems.itemReason}</span>
+      <span>CLEANLINESS: ${sortItems.itemCleanliness}</span>
+    </div>
+    `)
+  })
 }
+
+
 
  
 
