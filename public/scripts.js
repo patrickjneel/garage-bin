@@ -147,8 +147,9 @@ const itemCount = async () => {
   const itemJson = await itemData.json()
   const items = itemJson.items
   const itemLength = items.length
-  const cleanCount = items.filter(item => {
-    console.log(item.itemCleanliness.length)
+  const cleanCountDusty = items.filter(item => {
+    item.itemCleanliness.length === 'Dusty'
+    return $('.clean-count').append(`${item.itemCleanliness.length}`).splice(-3)
   })
   $('.item-count').append(`${itemLength}`)
 }
