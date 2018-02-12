@@ -41,6 +41,11 @@ const postItem = async () => {
   $('option').val('Cleanliness')
 }
 
+const sortItems = () => {
+  
+}
+
 
 $('.show-btn').on('click', showItems)
 $('.add-item-btn').on('click', postItem)
+$('.sort-btn').on('click', sortItems)
