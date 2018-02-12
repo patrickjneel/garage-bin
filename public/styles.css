@@ -42,6 +42,12 @@ select {
   width: 100px;
 }
 
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .item-list {
   background-image: url('https://previews.123rf.com/images/khaar/khaar1409/khaar140900114/31817179-white-garage-door-texture-pattern-background.jpg');
   border: 5px solid black;
@@ -68,7 +74,7 @@ button {
   height: 30px;
   font-size: 18px;
   margin: 15px;
-  width: 125px;
+  width: 145px;
 }
 
 .item {
