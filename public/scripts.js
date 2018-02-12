@@ -41,9 +41,27 @@ const postItem = async () => {
   $('option').val('Cleanliness')
 }
 
-const sortItems = () => {
+const sortItems = async () => {
+  const itemData = await fetch('/api/v1/all_items')
+  const itemJson = await itemData.json()
+  const itemArray = await itemJson.items
+  const sortArray = itemArray.sort((a,b) => {
+    const nameA = a.itemName.toUpperCase();
+    const nameB = b.itemName.toUpperCase();
+  if (nameA < nameB) {
+    return -1;
+  }
+  if (nameA > nameB) {
+    return 1;
+  }
+
   
+  return 0;
+  })
+  console.log(sortArray)
 }
+
+ 
 
 
 $('.show-btn').on('click', showItems)
