@@ -35,4 +35,90 @@ describe('Client Side Routes', () => {
 
 describe('API Routes', () => {
   
+  it('should get all of the items', () => {
+    return chai.request(server)
+    .get('/api/v1/all_items')
+    .then(response => {
+      response.should.have.status(200)
+      response.should.be.json;
+      response.body.should.be.a('object')
+      response.res.should.be.a('object')
+    })
+    .catch(error => {
+      throw error
+    })
+  })
+
+  it('should have a 500 error if path is bad', () => {
+    return chai.request(server)
+    .get('/api/v1/nonexistent')
+    .then(() => {
+
+    })
+    .catch(error => {
+      response.should.have.status(500)
+    })
+  })
+
+  it('should post a new item', () => {
+    return chai.request(server)
+    .post('/api/v1/all_items')
+    .send({
+      itemName: 'Dirty Dancing VHS',
+      itemReason: 'greatest',
+      itemCleanliness: 'Dusty'
+    })
+    .then(response => {
+      response.should.have.status(201)
+      response.body.should.be.a('object')
+    })
+    .catch(error => {
+      throw error;
+    })
+  })
+
+  it('should thorw have a 500 error if post is unsuccessful', () => {
+    return chai.request(server)
+    .post('/api/v1/item_namzesss')
+    .send({
+      itemName: 'Dirty Dancing VHS',
+      itemReason: 'greatest',
+      itemCleanliness: 'Dusty'
+    })
+    .then(() => {
+
+    })
+    .catch(error => {
+      response.should.have.status(500)
+    })
+  })
+
+  it.only('should update an item with a successful patch', () => {
+    return chai.request(server)
+    .patch('/api/v1/all_items')
+    .send({
+      itemCleanliness: 'Dusty'
+    })
+    .then(response => {
+      response.should.have.status(204)
+      response.body.should.be.a('object')
+    })
+    .catch(error => {
+      throw error;
+    })
+  })
+
+  it('should throw a 500 error is the patch is unsuccessful', () => {
+    return chai.request(server)
+    .patch('/api/v1/itemmmmmm')
+    .send({
+      itemCleanliness: 'Dusty'
+    })
+    .then(() => {
+
+    })
+    .catch(error => {
+      response.should.have.status(500)
+    })
+  })
 })
