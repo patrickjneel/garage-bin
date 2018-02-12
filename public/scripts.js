@@ -19,6 +19,12 @@ const showItems = async () => {
       <div class="item-info">
         <span>REASON: ${item.itemReason}</span>
         <span>CLEANLINESS: ${item.itemCleanliness}</span>
+        <select>CLEANLINESS:
+          <option value="Change Cleanliness">Change Cleanliness</option>
+          <option value="Sparkling">Sparkling</option>
+          <option value="Dusty">Dusty</option>
+          <option value="Rancid">Rancid</option>
+        </select>
       </div>
     </div>
     `)
@@ -75,6 +81,12 @@ const sortItems = async () => {
       <div class="item-info">
         <span>REASON: ${sortItems.itemReason}</span>
         <span>CLEANLINESS: ${sortItems.itemCleanliness}</span>
+        <select>CLEANLINESS:
+          <option value="Change Cleanliness">Change Cleanliness</option>
+          <option value="Sparkling">Sparkling</option>
+          <option value="Dusty">Dusty</option>
+          <option value="Rancid">Rancid</option>
+        </select>
       </div>
     </div>
     `)
@@ -111,6 +123,12 @@ const sortZa = async () => {
       <div class="item-info">
         <span>REASON: ${sortItems.itemReason}</span>
         <span>CLEANLINESS: ${sortItems.itemCleanliness}</span>
+        <select>CLEANLINESS:
+          <option value="Change Cleanliness">Change Cleanliness</option>
+          <option value="Sparkling">Sparkling</option>
+          <option value="Dusty">Dusty</option>
+          <option value="Rancid">Rancid</option>
+        </select>
       </div>
     </div>
       `)

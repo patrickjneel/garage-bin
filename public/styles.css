@@ -82,8 +82,8 @@ button {
 }
 
 .item-cards {
-  display: flex;
   border: 2px solid black;
+  display: flex;
   flex-direction: column;
   margin: 5px;
 }
