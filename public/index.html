@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Garage Bin</title>
+  <!-- <title>Garage Bin</title> -->
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
   <h1>Garage Bin</h1>
-  <input  class="item-inputs" placeholder="Item Name" />
-  <input  class="item-inputs" placeholder="Item Reason" />
-  <select>
-    <option value="Cleanliness">Cleanliness</option>
-    <option value="Sparkling">Sparkling</option>
-    <option value="Dusty">Dusty</option>
-    <option value="Rancid">Rancid</option>
-  </select>
-  <div class="item-list">item-list</div>
-  <button class="show-btn">Show Items</button>
+  <div class="input-area">
+    <input  class="item-inputs" id="item-name"placeholder="Item Name" />
+    <input  class="item-inputs" id="item-reason"placeholder="Item Reason" />
+    <select>
+      <option value="Cleanliness">Cleanliness</option>
+      <option value="Sparkling">Sparkling</option>
+      <option value="Dusty">Dusty</option>
+      <option value="Rancid">Rancid</option>
+    </select>
+    <button class="add-item-btn">Add Item</button>
+  </div>
+  <div class="item-area">
+    <div class="item-list"> 
+    </div>
+  </div>
+    <button class="show-btn">Show Items</button>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="scripts.js"></script>
