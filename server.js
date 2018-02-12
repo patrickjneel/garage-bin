@@ -44,6 +44,22 @@ app.post('/api/v1/all_items', (request, response) => {
     })
 })
 
+app.patch('/api/v1/all_items/:id', (request, response) => {
+  database('items')
+    .where({ id: request.params.id })
+    .update(request.body, '')
+    .then(update => {
+      if(!update) {
+        return response.sendStatus(404).json({error: 'Could not update item'})
+      } else {
+        response.sendStatus(204)
+      }
+    })
+    .catch(error => {
+      response.status(500).json({ error })
+    })
+})
+
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}.`)
 });

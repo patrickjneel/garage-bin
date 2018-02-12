@@ -31,5 +31,8 @@ describe('Client Side Routes', () => {
       response.should.have.status(404); 
     })
   })
+})
 
+describe('API Routes', () => {
+  
 })
