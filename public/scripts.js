@@ -147,9 +147,22 @@ const itemCount = async () => {
   const itemJson = await itemData.json()
   const items = itemJson.items
   const itemLength = items.length
-  const cleanCountDusty = items.filter(item => {
-    item.itemCleanliness.length === 'Dusty'
-    return $('.clean-count').append(`${item.itemCleanliness.length}`).splice(-3)
+  let sparkle = 0;
+  let dusty = 0;
+  let rancid = 0;
+
+  items.forEach(item => {
+    console.log(item)
+    if(item.itemCleanliness === 'Sparkling') {
+      sparkle += 1;
+    } else if(item.itemCleanliness === 'Dusty') {
+      dusty += 1;
+    } else if(item.itemCleanliness === 'Rancid') {
+      rancid += 1;
+    }
+    $('.sparkle-count').append(`${sparkle}`)
+    $('.dusty-count').append(`${dusty}`)
+    $('.rancid-count').append(`${rancid}`)
   })
   $('.item-count').append(`${itemLength}`)
 }
