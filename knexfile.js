@@ -12,7 +12,7 @@ module.exports = {
   },
   test: {
     client: 'pg',
-    connection: process.env.DATABASE_URL || 'postgres://localhost/garagebin_test',
+    connection: 'postgres://localhost/garagebin_test',
     useNullAsDefualt: true,
     migrations: {
       directory: 'db/migrations'
