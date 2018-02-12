@@ -1,3 +1,8 @@
+$(document).ready(() => {
+  itemCount()
+});
+
+
 const showItems = async () => {
   const itemData = await fetch('/api/v1/all_items')
   const itemJson = await itemData.json()
@@ -5,13 +10,22 @@ const showItems = async () => {
   $('.item-list').empty()
   $('.item-list').toggleClass('clicked')
 
+  
   if ($('.item-list').hasClass('clicked')) {
   const shownItems = items.map(item => {
   $('.item-list').append(
     `<div class="item-cards">
-      <h4>ITEM NAME: ${item.itemName}</h4>
-      <span>REASON: ${item.itemReason}</span>
-      <span>CLEANLINESS: ${item.itemCleanliness}</span>
+      <h4 class="item-name">ITEM NAME: ${item.itemName}</h4>
+      <div class="item-info">
+        <span>REASON: ${item.itemReason}</span>
+        <span>CLEANLINESS: ${item.itemCleanliness}</span>
+        <select>CLEANLINESS:
+          <option value="Change Cleanliness">Change Cleanliness</option>
+          <option value="Sparkling">Sparkling</option>
+          <option value="Dusty">Dusty</option>
+          <option value="Rancid">Rancid</option>
+        </select>
+      </div>
     </div>
     `)
   }) 
@@ -63,9 +77,17 @@ const sortItems = async () => {
   sortArray.map(sortItems => {
     $('.item-list').append(
     `<div class="item-cards">
-      <h4>ITEM NAME: ${sortItems.itemName}</h4>
-      <span>REASON: ${sortItems.itemReason}</span>
-      <span>CLEANLINESS: ${sortItems.itemCleanliness}</span>
+      <h4 class="item-name">ITEM NAME: ${sortItems.itemName}</h4>
+      <div class="item-info">
+        <span>REASON: ${sortItems.itemReason}</span>
+        <span>CLEANLINESS: ${sortItems.itemCleanliness}</span>
+        <select>CLEANLINESS:
+          <option value="Change Cleanliness">Change Cleanliness</option>
+          <option value="Sparkling">Sparkling</option>
+          <option value="Dusty">Dusty</option>
+          <option value="Rancid">Rancid</option>
+        </select>
+      </div>
     </div>
     `)
     })
@@ -97,9 +119,17 @@ const sortZa = async () => {
   sortArray.map(sortItems => {
     $('.item-list').prepend(
     `<div class="item-cards">
-      <h4>ITEM NAME: ${sortItems.itemName}</h4>
-      <span>REASON: ${sortItems.itemReason}</span>
-      <span>CLEANLINESS: ${sortItems.itemCleanliness}</span>
+      <h4 class="item-name">ITEM NAME: ${sortItems.itemName}</h4>
+      <div class="item-info">
+        <span>REASON: ${sortItems.itemReason}</span>
+        <span>CLEANLINESS: ${sortItems.itemCleanliness}</span>
+        <select>CLEANLINESS:
+          <option value="Change Cleanliness">Change Cleanliness</option>
+          <option value="Sparkling">Sparkling</option>
+          <option value="Dusty">Dusty</option>
+          <option value="Rancid">Rancid</option>
+        </select>
+      </div>
     </div>
       `)
     })
@@ -108,8 +138,26 @@ const sortZa = async () => {
   }
 }
 
+const displayItemInfo = (event) => {
+  $(event.target).next().toggleClass('item-info')
+}
+
+const itemCount = async () => {
+  const itemData = await fetch('/api/v1/all_items')
+  const itemJson = await itemData.json()
+  const items = itemJson.items
+  const itemLength = items.length
+  const cleanCount = items.filter(item => {
+    console.log(item.itemCleanliness.length)
+  })
+  $('.item-count').append(`${itemLength}`)
+}
+
 $('.show-btn').on('click', showItems)
 $('.add-item-btn').on('click', postItem)
 $('.sort-btn').on('click', sortItems)
 $('.sort-ZA-btn').on('click', sortZa)
+$(document).on('click', '.item-name', displayItemInfo)
+
+
 

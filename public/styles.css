@@ -82,8 +82,19 @@ button {
 }
 
 .item-cards {
-  display: flex;
   border: 2px solid black;
+  display: flex;
   flex-direction: column;
   margin: 5px;
+}
+
+.item-info {
+  display: none;
+}
+
+.counter {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
