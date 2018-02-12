@@ -24,21 +24,21 @@ const showItems = async () => {
 const postItem = async () => {
   const itemName = $('#item-name').val()
   const itemReason = $('#item-reason').val()
-  const itemCleanliness = $('select').closest('option').val()
-  console.log(itemCleanliness)
+  const itemCleanliness = $('select').children(':selected').val()
 
-  // const postItem = await fetch('/api/v1/all_items', {
-  //   method: 'POST',
-  //   body: JSON.stringify({itemName, itemReason, itemCleanliness}),
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   }
-  // })
-  // const itemData = await postItem.json()
-
-  // return itemData
+  const postItem = await fetch('/api/v1/all_items', {
+    method: 'POST',
+    body: JSON.stringify({itemName, itemReason, itemCleanliness}),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  const itemData = await postItem.json()
+    console.log(itemData)
+  return itemData
   $('#item-name').val('')
   $('#item-reason').val('')
+  $('option').val('Cleanliness')
 }
 
 
