@@ -59,6 +59,7 @@ const sortItems = async () => {
   
   return 0;
   })
+  if ($('.item-list').hasClass('clicked')) {
   sortArray.map(sortItems => {
     $('.item-list').append(
     `<div class="item-cards">
@@ -67,11 +68,15 @@ const sortItems = async () => {
       <span>CLEANLINESS: ${sortItems.itemCleanliness}</span>
     </div>
     `)
-  })
+    })
+  } else {
+   $('.item-list').empty()
+  }
 }
 
 const sortZa = async () => {
-   $('.item-list').empty()
+  $('.item-list').empty()
+  $('.item-list').toggleClass('clicked')
   const itemData = await fetch('/api/v1/all_items')
   const itemJson = await itemData.json()
   const itemArray = await itemJson.items
@@ -88,6 +93,7 @@ const sortZa = async () => {
   
   return 0;
   })
+  if ($('.item-list').hasClass('clicked')) {
   sortArray.map(sortItems => {
     $('.item-list').prepend(
     `<div class="item-cards">
@@ -95,8 +101,11 @@ const sortZa = async () => {
       <span>REASON: ${sortItems.itemReason}</span>
       <span>CLEANLINESS: ${sortItems.itemCleanliness}</span>
     </div>
-    `)
-  })
+      `)
+    })
+  } else {
+   $('.item-list').empty()
+  }
 }
 
 $('.show-btn').on('click', showItems)
