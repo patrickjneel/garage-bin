@@ -9,7 +9,7 @@ const showItems = async () => {
   const shownItems = items.map(item => {
   $('.item-list').append(
     `<div class="item-cards">
-      <h4>ITEM NAME: ${item.itemName}</h4>
+      <h4 class="item-name">ITEM NAME: ${item.itemName}</h4>
       <span>REASON: ${item.itemReason}</span>
       <span>CLEANLINESS: ${item.itemCleanliness}</span>
     </div>
@@ -63,7 +63,7 @@ const sortItems = async () => {
   sortArray.map(sortItems => {
     $('.item-list').append(
     `<div class="item-cards">
-      <h4>ITEM NAME: ${sortItems.itemName}</h4>
+      <h4 class="item-name">ITEM NAME: ${sortItems.itemName}</h4>
       <span>REASON: ${sortItems.itemReason}</span>
       <span>CLEANLINESS: ${sortItems.itemCleanliness}</span>
     </div>
@@ -97,7 +97,7 @@ const sortZa = async () => {
   sortArray.map(sortItems => {
     $('.item-list').prepend(
     `<div class="item-cards">
-      <h4>ITEM NAME: ${sortItems.itemName}</h4>
+      <h4 class="item-name">ITEM NAME: ${sortItems.itemName}</h4>
       <span>REASON: ${sortItems.itemReason}</span>
       <span>CLEANLINESS: ${sortItems.itemCleanliness}</span>
     </div>
