@@ -92,6 +92,9 @@ button {
   display: none;
 }
 
-/*.item-info-show {
-  display: all;
-}*/
+.counter {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
