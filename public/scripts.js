@@ -2,27 +2,26 @@ const showItems = async () => {
   const itemData = await fetch('/api/v1/all_items')
   const itemJson = await itemData.json()
   const items = itemJson.items
+  $('.item-list').empty()
+  $('.item-list').toggleClass('clicked')
 
-
-  if ($('.item-list').addClass('clicked')) {
-  $('.item-list').addClass('clicked').empty()
+  if ($('.item-list').hasClass('clicked')) {
   const shownItems = items.map(item => {
   $('.item-list').append(
     `<div class="item-cards">
-      <h4>ITEM NAME:${item.itemName}</h4>
-      <span>REASON:${item.itemReason}</span>
-      <span>CLEANLINESS${item.itemCleanliness}</span>
+      <h4>ITEM NAME: ${item.itemName}</h4>
+      <span>REASON: ${item.itemReason}</span>
+      <span>CLEANLINESS: ${item.itemCleanliness}</span>
     </div>
     `)
   }) 
-    return shownItems  
-  } 
-  if(!$('.item-list').addClass('clicked')) {
-    $('.item-list').removeClass('clicked').empty()
+      
+  } else {
+   $('.item-list').empty()
   }
 }
 
-const postItem = async (event) => {
+const postItem = async () => {
   const itemName = $('#item-name').val()
   const itemReason = $('#item-reason').val()
   const itemCleanliness = $('select').closest('option').val()
