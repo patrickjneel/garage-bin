@@ -160,9 +160,9 @@ const itemCount = async () => {
     } else if(item.itemCleanliness === 'Rancid') {
       rancid += 1;
     }
-    $('.sparkle-count').append(`${sparkle}`)
-    $('.dusty-count').append(`${dusty}`)
-    $('.rancid-count').append(`${rancid}`)
+    $('.sparkle-count').text(sparkle)
+    $('.dusty-count').text(dusty)
+    $('.rancid-count').text(rancid)
   })
   $('.item-count').append(`${itemLength}`)
 }
