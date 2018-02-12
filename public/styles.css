@@ -34,11 +34,23 @@ select {
   height: 26px;
 }
 
+.add-item-btn {
+  background-color: white;
+  font-size: 14px;
+  height: 26px;
+  margin: 0px 15px;
+  width: 100px;
+}
+
 .item-list {
   background-image: url('https://previews.123rf.com/images/khaar/khaar1409/khaar140900114/31817179-white-garage-door-texture-pattern-background.jpg');
   border: 5px solid black;
   width: 500px;
   height: 500px;
+}
+
+.clicked {
+  display: none;
 }
 
 button {
@@ -47,4 +59,8 @@ button {
   font-size: 18px;
   margin: 15px;
   width: 125px;
+}
+
+.item {
+  font-size: 18px;
 }
