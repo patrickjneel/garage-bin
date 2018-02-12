@@ -34,7 +34,6 @@ const postItem = async () => {
     }
   })
   const itemData = await postItem.json()
-    console.log(itemData)
   return itemData
   $('#item-name').val('')
   $('#item-reason').val('')
@@ -42,7 +41,8 @@ const postItem = async () => {
 }
 
 const sortItems = async () => {
-    $('.item-list').empty()
+  $('.item-list').empty()
+  $('.item-list').toggleClass('clicked')
   const itemData = await fetch('/api/v1/all_items')
   const itemJson = await itemData.json()
   const itemArray = await itemJson.items
@@ -70,11 +70,37 @@ const sortItems = async () => {
   })
 }
 
+const sortZa = async () => {
+   $('.item-list').empty()
+  const itemData = await fetch('/api/v1/all_items')
+  const itemJson = await itemData.json()
+  const itemArray = await itemJson.items
+  const sortArray = itemArray.sort((a,b) => {
+    const nameA = a.itemName.toUpperCase();
+    const nameB = b.itemName.toUpperCase();
+  if (nameA < nameB) {
+    return -1;
+  }
+  if (nameA > nameB) {
+    return 1;
+  }
 
-
- 
-
+  
+  return 0;
+  })
+  sortArray.map(sortItems => {
+    $('.item-list').prepend(
+    `<div class="item-cards">
+      <h4>ITEM NAME: ${sortItems.itemName}</h4>
+      <span>REASON: ${sortItems.itemReason}</span>
+      <span>CLEANLINESS: ${sortItems.itemCleanliness}</span>
+    </div>
+    `)
+  })
+}
 
 $('.show-btn').on('click', showItems)
 $('.add-item-btn').on('click', postItem)
 $('.sort-btn').on('click', sortItems)
+$('.sort-ZA-btn').on('click', sortZa)
+
