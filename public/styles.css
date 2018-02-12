@@ -87,3 +87,11 @@ button {
   flex-direction: column;
   margin: 5px;
 }
+
+.item-info {
+  display: none;
+}
+
+/*.item-info-show {
+  display: all;
+}*/

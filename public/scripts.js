@@ -10,8 +10,10 @@ const showItems = async () => {
   $('.item-list').append(
     `<div class="item-cards">
       <h4 class="item-name">ITEM NAME: ${item.itemName}</h4>
-      <span>REASON: ${item.itemReason}</span>
-      <span>CLEANLINESS: ${item.itemCleanliness}</span>
+      <div class="item-info">
+        <span>REASON: ${item.itemReason}</span>
+        <span>CLEANLINESS: ${item.itemCleanliness}</span>
+      </div>
     </div>
     `)
   }) 
@@ -64,8 +66,10 @@ const sortItems = async () => {
     $('.item-list').append(
     `<div class="item-cards">
       <h4 class="item-name">ITEM NAME: ${sortItems.itemName}</h4>
-      <span>REASON: ${sortItems.itemReason}</span>
-      <span>CLEANLINESS: ${sortItems.itemCleanliness}</span>
+      <div class="item-info">
+        <span>REASON: ${sortItems.itemReason}</span>
+        <span>CLEANLINESS: ${sortItems.itemCleanliness}</span>
+      </div>
     </div>
     `)
     })
@@ -98,8 +102,10 @@ const sortZa = async () => {
     $('.item-list').prepend(
     `<div class="item-cards">
       <h4 class="item-name">ITEM NAME: ${sortItems.itemName}</h4>
-      <span>REASON: ${sortItems.itemReason}</span>
-      <span>CLEANLINESS: ${sortItems.itemCleanliness}</span>
+      <div class="item-info">
+        <span>REASON: ${sortItems.itemReason}</span>
+        <span>CLEANLINESS: ${sortItems.itemCleanliness}</span>
+      </div>
     </div>
       `)
     })
@@ -108,8 +114,13 @@ const sortZa = async () => {
   }
 }
 
+const displayItemInfo = () => {
+  $('.item-info').toggleClass('item-info')
+}
+
 $('.show-btn').on('click', showItems)
 $('.add-item-btn').on('click', postItem)
 $('.sort-btn').on('click', sortItems)
 $('.sort-ZA-btn').on('click', sortZa)
+$(document).on('click', '.item-name', displayItemInfo)
 
