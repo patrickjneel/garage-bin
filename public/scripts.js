@@ -114,8 +114,8 @@ const sortZa = async () => {
   }
 }
 
-const displayItemInfo = () => {
-  $('.item-info').toggleClass('item-info')
+const displayItemInfo = (event) => {
+  $(event.target).next().toggleClass('item-info')
 }
 
 $('.show-btn').on('click', showItems)
