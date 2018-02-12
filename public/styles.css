@@ -50,7 +50,7 @@ select {
 }
 
 .clicked {
-  display: none;
+  background-image: none;
 }
 
 button {
@@ -63,4 +63,11 @@ button {
 
 .item {
   font-size: 18px;
+}
+
+.item-cards {
+  display: flex;
+  border: 2px solid black;
+  flex-direction: column;
+  margin: 5px;
 }

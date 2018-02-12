@@ -3,16 +3,22 @@ const showItems = async () => {
   const itemJson = await itemData.json()
   const items = itemJson.items
 
+  $('.item-list').addClass('clicked').empty()
+
+  if ($('.item-list').addClass('clicked')) {
   const shownItems = items.map(item => {
-    console.log(item.itemName)
-  $('.item-area').append(
-    `<h4>${item.itemName}</h4>
-    <span>${item.itemReason}</span>
-    <span>${item.itemCleanliness}</span>
+  $('.item-list').append(
+    `<div class="item-cards">
+      <h4>${item.itemName}</h4>
+      <span>${item.itemReason}</span>
+      <span>${item.itemCleanliness}</span>
+    </div>
     `)
   }) 
-  $('.item-list').addClass('clicked')
-  return shownItems
+    return shownItems  
+  } else {
+    $('.item-list').removeClass('clicked')
+  }
 }
 
 
