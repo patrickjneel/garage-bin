@@ -19,11 +19,11 @@ const showItems = async () => {
       <div class="item-info">
         <span>REASON: ${item.itemReason}</span>
         <span>CLEANLINESS: ${item.itemCleanliness}</span>
-        <select>CLEANLINESS:
-          <option value="Change Cleanliness">Change Cleanliness</option>
-          <option value="Sparkling">Sparkling</option>
-          <option value="Dusty">Dusty</option>
-          <option value="Rancid">Rancid</option>
+        <select class="card-select">
+          <option class="card-value" value="Change Cleanliness">Change Cleanliness</option>
+          <option class="card-value" value="Sparkling">Sparkling</option>
+          <option class="card-value" value="Dusty">Dusty</option>
+          <option class="card-value" value="Rancid">Rancid</option>
         </select>
       </div>
     </div>
@@ -81,11 +81,11 @@ const sortItems = async () => {
       <div class="item-info">
         <span>REASON: ${sortItems.itemReason}</span>
         <span>CLEANLINESS: ${sortItems.itemCleanliness}</span>
-        <select>CLEANLINESS:
-          <option value="Change Cleanliness">Change Cleanliness</option>
-          <option value="Sparkling">Sparkling</option>
-          <option value="Dusty">Dusty</option>
-          <option value="Rancid">Rancid</option>
+        <select class="card-select">
+          <option class="card-value" value="Change Cleanliness">Change Cleanliness</option>
+          <option class="card-value" value="Sparkling">Sparkling</option>
+          <option class="card-value" value="Dusty">Dusty</option>
+          <option class="card-value" value="Rancid">Rancid</option>
         </select>
       </div>
     </div>
@@ -123,11 +123,11 @@ const sortZa = async () => {
       <div class="item-info">
         <span>REASON: ${sortItems.itemReason}</span>
         <span>CLEANLINESS: ${sortItems.itemCleanliness}</span>
-        <select>CLEANLINESS:
-          <option value="Change Cleanliness">Change Cleanliness</option>
-          <option value="Sparkling">Sparkling</option>
-          <option value="Dusty">Dusty</option>
-          <option value="Rancid">Rancid</option>
+        <select class="card-select">
+          <option class="card-value" value="Change Cleanliness">Change Cleanliness</option>
+          <option class="card-value" value="Sparkling">Sparkling</option>
+          <option class="card-value" value="Dusty">Dusty</option>
+          <option class="card-value" value="Rancid">Rancid</option>
         </select>
       </div>
     </div>
@@ -152,7 +152,6 @@ const itemCount = async () => {
   let rancid = 0;
 
   items.forEach(item => {
-    console.log(item)
     if(item.itemCleanliness === 'Sparkling') {
       sparkle += 1;
     } else if(item.itemCleanliness === 'Dusty') {
@@ -167,11 +166,27 @@ const itemCount = async () => {
   $('.item-count').append(`${itemLength}`)
 }
 
+const updateClean = async (event) => {
+  const optionValue = $(event.target).val()
+
+  const updateStatus = await fetch(`/api/v1/all_items/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ optionValue, id }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  const updatePatch = await updateStatus.json()
+    console.log(updatePatch)
+  return updatePatch
+}
+
 $('.show-btn').on('click', showItems)
 $('.add-item-btn').on('click', postItem)
 $('.sort-btn').on('click', sortItems)
 $('.sort-ZA-btn').on('click', sortZa)
 $(document).on('click', '.item-name', displayItemInfo)
+$(document).on('change', '.card-select', updateClean)
 
 
 
