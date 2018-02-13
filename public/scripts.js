@@ -166,8 +166,18 @@ const itemCount = async () => {
   $('.item-count').append(`${itemLength}`)
 }
 
-const updateClean = () => {
-  console.log('select')
+const updateClean = async (event) => {
+  const optionValue = $(event.target).val()
+  const updateStatus = await fetch('/api/v1/all_items/:id', {
+    method: 'PATCH',
+    body: JSON.stringify({optionValue}),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  const updatePatch = await updateStatus.json()
+    console.log(updatePatch)
+  return updatePatch
 }
 
 $('.show-btn').on('click', showItems)
@@ -175,7 +185,7 @@ $('.add-item-btn').on('click', postItem)
 $('.sort-btn').on('click', sortItems)
 $('.sort-ZA-btn').on('click', sortZa)
 $(document).on('click', '.item-name', displayItemInfo)
-$(document).on('click', '.card-value', updateClean)
+$(document).on('change', '.card-select', updateClean)
 
 
 
