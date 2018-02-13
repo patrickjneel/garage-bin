@@ -168,10 +168,10 @@ const itemCount = async () => {
 
 const updateClean = async (event) => {
   const optionValue = $(event.target).val()
-  
-  const updateStatus = await fetch('/api/v1/all_items/:id', {
+
+  const updateStatus = await fetch(`/api/v1/all_items/${id}`, {
     method: 'PATCH',
-    body: JSON.stringify({optionValue}),
+    body: JSON.stringify({ optionValue, id }),
     headers: {
       'Content-Type': 'application/json'
     }
