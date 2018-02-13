@@ -181,6 +181,8 @@ const updateClean = async (event) => {
   return updatePatch
 }
 
+
+
 $('.show-btn').on('click', showItems)
 $('.add-item-btn').on('click', postItem)
 $('.sort-btn').on('click', sortItems)
