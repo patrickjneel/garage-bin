@@ -118,7 +118,6 @@ describe('API Routes', () => {
         itemCleanliness: 'Dusty'
       })
       .then(response => {
-        // console.log(response);
         response.should.have.status(200);
         response.body.success.should.equal(`Successfully updated item with id ${itemId}`);
       })
