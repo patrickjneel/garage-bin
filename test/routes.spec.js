@@ -10,7 +10,7 @@ chai.use(chaiHttp);
 
 describe('Client Side Routes', () => {
 
-  it.only('should return the homepage', () => {
+  it('should return the homepage', () => {
     return chai.request(server)
     .get('/')
     .then(response => {
@@ -75,18 +75,36 @@ describe('API Routes', () => {
     })
     .then(response => {
       response.should.have.status(201)
+      response.should.be.json;
       response.body.should.be.a('object')
       response.body.should.have.property('id')
-      // response.body.should.have.property('itemName')
-      // response.body.should.have.property('itemReason')
-      // response.body.should.have.property('itemCleanliness')
+  
     })
     .catch(error => {
       throw error;
     })
   })
 
-  
+  it('Should return a 422 error if a parameter is missing', () => {
+      return chai
+        .request(server)
+        .post('/api/v1/items')
+        .send({
+          itemName: 'Top Gun',
+          itemReason: "great film"
+        })
+        .then(response => {
+          response.should.have.status(422);
+          response.should.be.json;
+          response.error.text.should.equal(
+            '{"error":"You are missing a required field itemCleanliness"}'
+          );
+        })
+        .catch(error => {
+          throw error;
+        });
+    });
+
 
   it.skip('should update an item with a successful patch', () => {
     return chai.request(server)
