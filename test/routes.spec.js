@@ -63,8 +63,6 @@ describe('API Routes', () => {
     })
   })
 
-  
-
   it('should post a new item', () => {
     return chai.request(server)
     .post('/api/v1/items')
@@ -106,32 +104,44 @@ describe('API Routes', () => {
     });
 
 
-  it.skip('should update an item with a successful patch', () => {
+  it.only('should update an item with a successful patch', () => {
     return chai.request(server)
-    .patch('/api/v1/items')
-    .send({
-      itemCleanliness: 'Dusty'
-    })
+    .get('/api/v1/items')
     .then(response => {
-      response.should.have.status(204)
-      response.body.should.be.a('object')
+      const itemId = response.body.items[0].id
+      return itemId;
+    })
+    .then(itemId => {
+      return chai.request(server)
+      .patch(`/api/v1/items/${itemId}`)
+      .send({
+        itemCleanliness: 'Dusty'
+      })
+      .then(response => {
+        // console.log(response);
+        response.should.have.status(200);
+        response.body.success.should.equal(`Successfully updated item with id ${itemId}`);
+      })
+      .catch(error => {
+        throw error;
+      })
     })
     .catch(error => {
       throw error;
     })
   })
 
-  it('should throw a 500 error is the patch is unsuccessful', () => {
-    return chai.request(server)
-    .patch('/api/v1/itemmmmmm')
-    .send({
-      itemCleanliness: 'Dusty'
-    })
-    .then(() => {
+  // it('should throw a 500 error is the patch is unsuccessful', () => {
+  //   return chai.request(server)
+  //   .patch('/api/v1/itemmmmmm')
+  //   .send({
+  //     itemCleanliness: 'Dusty'
+  //   })
+  //   .then(() => {
 
-    })
-    .catch(error => {
-      response.should.have.status(500)
-    })
-  })
+  //   })
+  //   .catch(error => {
+  //     response.should.have.status(500)
+  //   })
+  // })
 })

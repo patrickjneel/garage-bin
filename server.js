@@ -45,18 +45,22 @@ app.post('/api/v1/items', (request, response) => {
 })
 
 app.patch('/api/v1/items/:id', (request, response) => {
+  const { id } = request.params;
+  
   database('items')
-    .where({ id: request.params.id })
-    .update(request.body, '')
-    .then(update => {
-      if(!update) {
-        return response.sendStatus(404).json({error: 'Could not update item'})
-      } else {
-        response.sendStatus(204)
-      }
+    .where('id', id)
+    .update(request.body)
+    .then(item => {
+      console.log(item)
+      if(!item) {
+        return response.status(422).json({error: `Could not update item with id ${id}`})
+      } 
+        return response.status(200).json({
+          success: `Successfully updated item with id ${id}`
+        })
     })
     .catch(error => {
-      response.status(500).json({ error })
+      return response.status(500).json({ error })
     })
 })
 
