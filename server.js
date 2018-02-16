@@ -16,7 +16,7 @@ app.get('/', (request,response) => {
   response.send('Welcome')
 });
 
-app.get('/api/v1/all_items', (request, response) => {
+app.get('/api/v1/items', (request, response) => {
   database('items').select()
     .then(items => {
       return response.status(200).json({ items })
@@ -26,7 +26,7 @@ app.get('/api/v1/all_items', (request, response) => {
     })
 })
 
-app.post('/api/v1/all_items', (request, response) => {
+app.post('/api/v1/items', (request, response) => {
   const item = request.body;
   for (let requiredParameter of ['itemName', 'itemReason', 'itemCleanliness']) {
     if (!item[requiredParameter]) {
@@ -44,7 +44,7 @@ app.post('/api/v1/all_items', (request, response) => {
     })
 })
 
-app.patch('/api/v1/all_items/:id', (request, response) => {
+app.patch('/api/v1/items/:id', (request, response) => {
   database('items')
     .where({ id: request.params.id })
     .update(request.body, '')

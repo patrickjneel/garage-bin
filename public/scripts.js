@@ -4,7 +4,7 @@ $(document).ready(() => {
 
 
 const showItems = async () => {
-  const itemData = await fetch('/api/v1/all_items')
+  const itemData = await fetch('/api/v1/items')
   const itemJson = await itemData.json()
   const items = itemJson.items
   $('.item-list').empty()
@@ -13,8 +13,9 @@ const showItems = async () => {
   
   if ($('.item-list').hasClass('clicked')) {
   const shownItems = items.map(item => {
+    console.log(item.id)
   $('.item-list').append(
-    `<div class="item-cards">
+    `<div class="item-cards" data-item-id=${item.id}>
       <h4 class="item-name">ITEM NAME: ${item.itemName}</h4>
       <div class="item-info">
         <span>REASON: ${item.itemReason}</span>
@@ -40,7 +41,7 @@ const postItem = async () => {
   const itemReason = $('#item-reason').val()
   const itemCleanliness = $('select').children(':selected').val()
 
-  const postItem = await fetch('/api/v1/all_items', {
+  const postItem = await fetch('/api/v1/items', {
     method: 'POST',
     body: JSON.stringify({itemName, itemReason, itemCleanliness}),
     headers: {
@@ -57,7 +58,7 @@ const postItem = async () => {
 const sortItems = async () => {
   $('.item-list').empty()
   $('.item-list').toggleClass('clicked')
-  const itemData = await fetch('/api/v1/all_items')
+  const itemData = await fetch('/api/v1/items')
   const itemJson = await itemData.json()
   const itemArray = await itemJson.items
   const sortArray = itemArray.sort((a,b) => {
@@ -99,7 +100,7 @@ const sortItems = async () => {
 const sortZa = async () => {
   $('.item-list').empty()
   $('.item-list').toggleClass('clicked')
-  const itemData = await fetch('/api/v1/all_items')
+  const itemData = await fetch('/api/v1/items')
   const itemJson = await itemData.json()
   const itemArray = await itemJson.items
   const sortArray = itemArray.sort((a,b) => {
@@ -143,7 +144,7 @@ const displayItemInfo = (event) => {
 }
 
 const itemCount = async () => {
-  const itemData = await fetch('/api/v1/all_items')
+  const itemData = await fetch('/api/v1/items')
   const itemJson = await itemData.json()
   const items = itemJson.items
   const itemLength = items.length
@@ -169,7 +170,7 @@ const itemCount = async () => {
 const updateClean = async (event) => {
   const optionValue = $(event.target).val()
 
-  const updateStatus = await fetch(`/api/v1/all_items/${id}`, {
+  const updateStatus = await fetch(`/api/v1/items/${id}`, {
     method: 'PATCH',
     body: JSON.stringify({ optionValue, id }),
     headers: {
