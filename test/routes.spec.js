@@ -17,7 +17,9 @@ describe('Client Side Routes', () => {
       console.log(response.buttons)
       response.should.have.status(200);
       response.should.be.html;
-      response.res.text.should.equal('<!DOCTYPE html>\n<html>\n<head>\n  <link rel="stylesheet" type="text/css" href="styles.css">\n</head>\n<body>\n  <h1>Garage Bin</h1>\n  <div class="input-area">\n    <input  class="item-inputs" id="item-name"placeholder="Item Name" />\n    <input  class="item-inputs" id="item-reason"placeholder="Item Reason" />\n    <select>\n      <option value="Cleanliness">Cleanliness</option>\n      <option value="Sparkling">Sparkling</option>\n      <option value="Dusty">Dusty</option>\n      <option value="Rancid">Rancid</option>\n    </select>\n    <button class="add-item-btn">Add Item</button>\n  </div>\n  <div class="buttons">\n    <button class="show-btn">Show Items</button>\n    <button class="sort-btn">Sort Items A-Z</button>\n    <button class="sort-ZA-btn">Sort Items Z-A</button>\n  </div>\n  <div class="counter">\n    <h4 class="item-count">\n      Total Count:\n    </h4>\n    <h4>SparkleCount: <span class="sparkle-count"></span></h4>\n    <h4>Dusty Count: <span class="dusty-count"></span></h4>\n    <h4>Rancid Count: <span class="rancid-count"></span></h4>\n  </div>\n  <div class="item-area">\n    <div class="item-list"> \n    </div>\n  </div>\n\n<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>\n  <script src="scripts.js"></script>\n</body>\n</html>\n')
+      response.res.text.includes('Garage Bin');
+      response.text.should.match(/class="show-btn/)
+ 
     })
     .catch(error => {
       throw error;
@@ -49,13 +51,12 @@ describe('API Routes', () => {
     .then(response => {
       response.should.have.status(200)
       response.should.be.json;
-      response.body.should.be.a('object')
-      response.body.items.should.be.a('array')
-      response.body.items.length.should.equal(3)
-      response.body.items[0].should.have.property('id');
-      response.body.items[0].should.have.property('itemName', 'guitar');
-      response.body.items[0].should.have.property('itemReason', 'need it');
-      response.body.items[0].should.have.property('itemCleanliness', 'Sparkling');
+      response.body.should.be.a('array')
+      response.body.length.should.equal(3)
+      response.body[0].should.have.property('id');
+      response.body[0].should.have.property('itemName', 'guitar');
+      response.body[0].should.have.property('itemReason', 'need it');
+      response.body[0].should.have.property('itemCleanliness', 'Sparkling');
      
     })
     .catch(error => {
@@ -104,11 +105,11 @@ describe('API Routes', () => {
     });
 
 
-  it.only('should update an item with a successful patch', () => {
+  it('should update an item with a successful patch', () => {
     return chai.request(server)
     .get('/api/v1/items')
     .then(response => {
-      const itemId = response.body.items[0].id
+      const itemId = response.body[0].id
       return itemId;
     })
     .then(itemId => {
@@ -130,17 +131,22 @@ describe('API Routes', () => {
     })
   })
 
-  // it('should throw a 500 error is the patch is unsuccessful', () => {
-  //   return chai.request(server)
-  //   .patch('/api/v1/itemmmmmm')
-  //   .send({
-  //     itemCleanliness: 'Dusty'
-  //   })
-  //   .then(() => {
-
-  //   })
-  //   .catch(error => {
-  //     response.should.have.status(500)
-  //   })
-  // })
+  it.skip('should throw a 404 error is the patch is unsuccessful', () => {
+    return chai.request(server)
+    .patch('/api/v1/items/43')
+    .send({
+      nothing: ''
+    })
+    .then(response => {
+      console.log(response)
+      response.should.have.status(404)
+      response.should.be.json;
+      response.error.text.should.equal({
+          error: 'Could not update item with id 43'
+        })
+    })
+    .catch(error => {
+      throw error;
+    })
+  })
 })
