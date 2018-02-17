@@ -6,7 +6,7 @@ $(document).ready(() => {
 const showItems = async () => {
   const itemData = await fetch('/api/v1/items')
   const itemJson = await itemData.json()
-  const items = itemJson.items
+  const items = itemJson
   $('.item-list').empty()
   $('.item-list').toggleClass('clicked')
 
@@ -60,7 +60,7 @@ const sortItems = async () => {
   $('.item-list').toggleClass('clicked')
   const itemData = await fetch('/api/v1/items')
   const itemJson = await itemData.json()
-  const itemArray = await itemJson.items
+  const itemArray = await itemJson
   const sortArray = itemArray.sort((a,b) => {
     const nameA = a.itemName.toUpperCase();
     const nameB = b.itemName.toUpperCase();
@@ -102,7 +102,7 @@ const sortZa = async () => {
   $('.item-list').toggleClass('clicked')
   const itemData = await fetch('/api/v1/items')
   const itemJson = await itemData.json()
-  const itemArray = await itemJson.items
+  const itemArray = await itemJson
   const sortArray = itemArray.sort((a,b) => {
     const nameA = a.itemName.toUpperCase();
     const nameB = b.itemName.toUpperCase();
@@ -146,7 +146,7 @@ const displayItemInfo = (event) => {
 const itemCount = async () => {
   const itemData = await fetch('/api/v1/items')
   const itemJson = await itemData.json()
-  const items = itemJson.items
+  const items = itemJson
   const itemLength = items.length
   let sparkle = 0;
   let dusty = 0;
