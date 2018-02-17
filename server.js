@@ -19,7 +19,7 @@ app.get('/', (request,response) => {
 app.get('/api/v1/items', (request, response) => {
   database('items').select()
     .then(items => {
-      return response.status(200).json({ items })
+      return response.status(200).json(items)
     })
     .catch(error => {
       return response.status(500).json({ error })
@@ -51,9 +51,8 @@ app.patch('/api/v1/items/:id', (request, response) => {
     .where('id', id)
     .update(request.body)
     .then(item => {
-      console.log(item)
       if(!item) {
-        return response.status(422).json({error: `Could not update item with id ${id}`})
+        return response.status(404).json({error: `Could not update item with id ${id}`})
       } 
         return response.status(200).json({
           success: `Successfully updated item with id ${id}`
